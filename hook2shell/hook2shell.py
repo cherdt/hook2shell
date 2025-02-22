@@ -83,7 +83,8 @@ def get_ls(token):
 @app.route("/generate")
 def generate():
     """An endpoint that generates a SHA256sum from /dev/urandom"""
-    output = subprocess.getoutput(['head /dev/urandom | sha256sum'])
+    output = subprocess.getoutput(
+            ['head /dev/urandom | sha256sum | cut -d" " -f1'])
     return f"New token: {output}"
 
 @app.route("/test/")

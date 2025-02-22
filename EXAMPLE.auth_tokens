@@ -1,0 +1,4 @@
+# path	expiration	token
+/ls	*	2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b
+# if ENFORCE_SHA256_TOKENS is True, the following will fail
+ls      -       topsecret

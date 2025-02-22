@@ -1,5 +1,6 @@
 activate:
-	source ./venv/bin/activate
+	echo Apparently this does not work from a Makefile
+	echo source venv/bin/activate
 
 dev:
 	FLASK_APP=hook2shell.py flask run

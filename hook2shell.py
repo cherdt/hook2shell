@@ -8,7 +8,7 @@ ENFORCE_SHA256_TOKENS=False
 with open('./docroot.html', encoding="utf-8") as f:
     docroot_html = f.read()
 
-with open('auth_tokens', encoding="utf-8") as f:
+with open('.auth_tokens', encoding="utf-8") as f:
     auth_tokens = f.readlines()
 
 def is_valid_auth_token(endpoint, token):

@@ -9,19 +9,25 @@ with open('./docroot.html', encoding="utf-8") as f:
 with open('auth_tokens', encoding="utf-8") as f:
     auth_tokens = f.readlines()
 
-def is_authorized(endpoint, token):
-    """Check if the token is authorized to access the specified endpoint"""
-    if endpoint == "ls" and token == "token":
-        return True
-
+def is_valid_auth_token(endpoint, token):
+    """Check the user-supplied token agains auth_tokens"""
     for line in auth_tokens:
         if line.startswith("#"):
             continue
+        # TODO: check for valid date
         else:
             (path, exp, secret) = line.rstrip().split('\t')
             if endpoint == path and token == secret:
                 return True
     return False
+
+def is_authorized(endpoint, token):
+    """Check if the token is authorized to access the specified endpoint"""
+    # hard-coded example
+    if endpoint == "ls" and token == "token":
+        return True
+
+    return is_valid_auth_token(endpoint, token)
 
 
 @app.route("/ls/")
@@ -39,6 +45,11 @@ def get_ls(token):
     output = subprocess.check_output(['ls', '-l'])
     return f"ran ls: {output}"
 
+@app.route("/generate")
+def generate():
+    """An endpoint that generates a SHA256sum from /dev/urandom"""
+    output = subprocess.getoutput(['head /dev/urandom | sha256sum'])
+    return f"New token: {output}"
 
 @app.route("/test/")
 def test():

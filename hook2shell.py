@@ -6,11 +6,21 @@ app = Flask(__name__)
 with open('./docroot.html', encoding="utf-8") as f:
     docroot_html = f.read()
 
+with open('auth_tokens', encoding="utf-8") as f:
+    auth_tokens = f.readlines()
 
 def is_authorized(endpoint, token):
     """Check if the token is authorized to access the specified endpoint"""
     if endpoint == "ls" and token == "token":
         return True
+
+    for line in auth_tokens:
+        if line.startswith("#"):
+            continue
+        else:
+            (path, exp, secret) = line.rstrip().split('\t')
+            if endpoint == path and token == secret:
+                return True
     return False
 
 

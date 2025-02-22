@@ -3,6 +3,8 @@ import subprocess
 from flask import Flask
 app = Flask(__name__)
 
+ENFORCE_SHA256_TOKENS=False
+
 with open('./docroot.html', encoding="utf-8") as f:
     docroot_html = f.read()
 
@@ -17,6 +19,8 @@ def is_valid_auth_token(endpoint, token):
         # TODO: check for valid date
         else:
             (path, exp, secret) = line.rstrip().split('\t')
+            if ENFORCE_SHA256_TOKENS and not (len(secret) == 64 and secret.isalnum()):
+                return False
             if endpoint == path and token == secret:
                 return True
     return False

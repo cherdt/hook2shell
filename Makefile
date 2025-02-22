@@ -3,7 +3,7 @@ activate:
 	echo source venv/bin/activate
 
 dev:
-	FLASK_APP=hook2shell.py flask run
+	FLASK_APP=hook2shell/hook2shell.py flask run
 
 build:
 	docker build --tag hook2shell .

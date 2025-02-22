@@ -1,4 +1,7 @@
 # path	expiration	token
-/ls	*	2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b
+ls	*	2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b
 # if ENFORCE_SHA256_TOKENS is True, the following will fail
 ls      -       topsecret
+# expirations should be in form YYYY-MM-DD
+ls	2038-01-01	future
+ls	2025-01-01	past

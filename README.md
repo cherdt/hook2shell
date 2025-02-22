@@ -8,14 +8,22 @@ Commands can require authorization. There is an `EXAMPLE.auth_tokens` file, rena
 Questions:
 
 * Should all routes check for authorization? If so, how to allow for routes that should be "public"?
-* What should a non-expiring token look like? `*`? `-`? Anything that is not a valid date?
-* My example uses a SHA256 hash value for a token, but tokens can be anything. Should that be restricted? Force people to use non-trivial tokens?
+* Use a decorator for routes that require authorization
+* Use a config file instead of constants (see below)
 
 Other questions:
 
 * Can the route/endpoints be normalized? Is that a variable that is already available?
 * if the route is `route` can `route/` also work? Should it also work?
 
+Config options
+--------------
+
+Currently in `hook2shell.py`, could be moved to a config file:
+
+   ENFORCE_SHA256_TOKENS=False
+   ALLOW_NON_EXPIRING_TOKENS=True
+   NON_EXPIRING_SYMBOLS=["*", "-"]
 
 TODO:
 -----

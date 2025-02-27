@@ -1,9 +1,9 @@
 activate:
-	source venv/bin/activate
+	echo Apparently this does not work from a Makefile
+	echo source venv/bin/activate
 
 dev:
-	export FLASK_APP=hook2shell.py
-	flask run
+	FLASK_APP=hook2shell/hook2shell.py flask run
 
 build:
 	docker build --tag hook2shell .

@@ -1,12 +1,28 @@
-hook2shell
-==========
+🪝 hook2shell 🐚
+================
 
-A webhook listener that runs shell commands.
+Very beta. A webhook listener that runs shell commands.
 
-TODO:
------
+This might be useful on single-user Linux hosts or in tightly controlled environments. I would not recommend running this application on a world-accessible server.
 
-Actually make use of tokens/secrets in some way.
+Commands can require authentication tokens. There is an `EXAMPLE.auth_tokens` file, rename this to `.auth_tokens` to test with this file. A sufficiently complex token (say, a SHA256 hash generated from random data) should be sufficiently unguessable (that it, it would take a very long time to brute-force). A future feature could be to lookup tokens from a database, a token administrator admin endpoint, etc. At that point, maybe just use JWT tokens.
+
+Questions:
+
+* Should all routes check for authorization? If so, how to allow for routes that should be "public"?
+* Use a decorator for routes that require authorization
+* Use a config file instead of constants (see below)
+* Can the route/endpoints be normalized? Is that a variable that is already available to Flask? I'm thinking of comparing `route` and `/route` and `/route/` in the `.auth_token` file.
+
+Config options
+--------------
+
+Currently in `hook2shell.py`, could be moved to a config file:
+
+   ENFORCE_SHA256_TOKENS=False
+   ALLOW_NON_EXPIRING_TOKENS=True
+   NON_EXPIRING_SYMBOLS=["*", "-"]
+
 
 Run in the Flask dev server
 ---------------------------

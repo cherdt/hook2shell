@@ -19,9 +19,9 @@ Config options
 
 Currently in `hook2shell.py`, could be moved to a config file:
 
-   ENFORCE_SHA256_TOKENS=False
-   ALLOW_NON_EXPIRING_TOKENS=True
-   NON_EXPIRING_SYMBOLS=["*", "-"]
+    ENFORCE_SHA256_TOKENS=False
+    ALLOW_NON_EXPIRING_TOKENS=True
+    NON_EXPIRING_SYMBOLS=["*", "-"]
 
 
 Run in the Flask dev server
@@ -45,3 +45,21 @@ Run in the Docker container
 
     docker run -d -p 9080:9080 hook2shell
 
+Using with an Apache2 reverse proxy
+-----------------------------------
+
+I added the following to my Apache2 config to pass traffic to the uWSGI server running on the Docker container. Note that [mod_proxy](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html) must be enabled:
+
+    ProxyPass "/hook2shell"  "http://localhost:9080/"
+    ProxyPassReverse "/hook2shell"  "http://localhost:9080/"
+
+Using with an Nginx reverse proxy
+---------------------------------
+
+I added the following to my Nginx config to pass traffic to the uWSGI server running on the Docker container:
+
+    location /hook2shell/ {
+        proxy_pass http://localhost:9080/;
+    }
+
+Note that Nginx can use the uWSGI protocol directly. I have not tried this, see [uWSGI: Putting behind a full webserver](https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html#putting-behind-a-full-webserver) for details.

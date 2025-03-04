@@ -1,7 +1,7 @@
 🪝 hook2shell 🐚
 ================
 
-![pylint](https://github.com/cherdt/hook2shell/actions/workflows/main.yml/badge.svg?branch=main&event=push)
+![pylint](https://github.com/cherdt/hook2shell/actions/workflows/pylint.yml/badge.svg?branch=main&event=push)
 
 Beta. A webhook listener that runs shell commands.
 

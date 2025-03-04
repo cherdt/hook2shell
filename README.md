@@ -1,7 +1,9 @@
 🪝 hook2shell 🐚
 ================
 
-Very beta. A webhook listener that runs shell commands.
+![pylint](https://github.com/cherdt/hook2shell/actions/workflows/main.yml/badge.svg?branch=main&event=push)
+
+Beta. A webhook listener that runs shell commands.
 
 This might be useful on single-user Linux hosts or in tightly controlled environments. I would not recommend running this application on a world-accessible server.
 

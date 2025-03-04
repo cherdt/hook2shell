@@ -19,9 +19,9 @@ Config options
 
 Currently in `hook2shell.py`, could be moved to a config file:
 
-   ENFORCE_SHA256_TOKENS=False
-   ALLOW_NON_EXPIRING_TOKENS=True
-   NON_EXPIRING_SYMBOLS=["*", "-"]
+    ENFORCE_SHA256_TOKENS=False
+    ALLOW_NON_EXPIRING_TOKENS=True
+    NON_EXPIRING_SYMBOLS=["*", "-"]
 
 
 Run in the Flask dev server

@@ -27,7 +27,7 @@ def is_future_date(expiration):
         if datetime.date.today() < datetime.date(int(year), int(month), int(day)):
             return True
         return False
-    except:
+    except ValueError:
         return False
 
 def is_valid_expiration(expiration):
@@ -46,14 +46,14 @@ def is_valid_auth_token(endpoint, token):
     for line in auth_tokens:
         if line.startswith("#"):
             continue
-        else:
-            (path, expiration, secret) = line.rstrip().split('\t')
-            if not is_valid_expiration(expiration):
-                continue
-            if ENFORCE_SHA256_TOKENS and not (len(secret) == 64 and secret.isalnum()):
-                continue
-            if endpoint == path and token == secret:
-                return True
+
+        (path, expiration, secret) = line.rstrip().split('\t')
+        if not is_valid_expiration(expiration):
+            continue
+        if ENFORCE_SHA256_TOKENS and not (len(secret) == 64 and secret.isalnum()):
+            continue
+        if endpoint == path and token == secret:
+            return True
     return False
 
 def is_authorized(endpoint, token):
